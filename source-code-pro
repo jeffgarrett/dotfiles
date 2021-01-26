@@ -1,0 +1,19 @@
+# Download source code pro
+if ! [ -d ~/.local/share/fonts/adobe-source-code-pro ] ; then
+    git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.local/share/fonts/adobe-source-code-pro
+    fc-cache -f -v ~/.local/share/fonts/adobe-source-code-pro
+fi
+
+# Tell grub to use it
+sudo grub-mkfont -s 32 -o /boot/grub/fonts/source-code-pro.pf2 ~/.local/share/fonts/adobe-source-code-pro/OTF/SourceCodePro-Regular.otf
+GRUB_FONT=$(source /etc/default/grub; echo $GRUB_FONT)
+if [ -n "$GRUB_FONT" ] ; then
+    sudo sed -i 's,GRUB_FONT=.*,GRUB_FONT="/boot/grub/fonts/source-code-pro.pf2",' /etc/default/grub
+else
+    sudo sh -c 'echo GRUB_FONT=\"/boot/grub/fonts/source-code-pro.pf2\" >> /etc/default/grub'
+fi
+sudo update-grub
+
+# Tell urxvt to use it
+#URxvt*font: xft:Source Code Pro:size=16
+#URxvt*boldFont: xft:Monospace:bold:size=16

@@ -1,0 +1,5 @@
+# Download source sans pro
+if ! [ -d ~/.local/share/fonts/adobe-source-sans-pro ] ; then
+    git clone --depth 1 --branch release https://github.com/adobe-fonts/source-sans-pro.git ~/.local/share/fonts/adobe-source-sans-pro
+    fc-cache -f -v ~/.local/share/fonts/adobe-source-sans-pro
+fi

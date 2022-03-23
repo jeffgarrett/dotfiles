@@ -8,6 +8,15 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- Collection of configurations for the built-in LSP client
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      local lsp = require('lspconfig')
+      require('lsp').setup(lsp)
+    end
+  }
+
   --   -- Simple plugins can be specified as strings
   --   use '9mm/vim-closer'
   -- 
@@ -84,7 +93,7 @@ return require('packer').startup(function(use)
   vim.cmd([[
     augroup packer_user_config
       autocmd!
-      autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+      autocmd BufWritePost plugins.lua source <afile> | PackerSync
     augroup end
   ]])
 end)

@@ -12,7 +12,6 @@ let mapleader = ","
 "Increase the command/search history
 "set history=100000
 
-
 " XXXX
 runtime plugin/matchit.vim
 
@@ -45,7 +44,6 @@ imap <F10> <ESC>1G=Ga
 set spell
 set spelllang=en
 
-"set background=light
 set tabpagemax=40
 syntax enable
 set foldenable
@@ -69,7 +67,6 @@ set nu
 set t_Co=256
 let s:solarized_termtrans = 1
 let g:solarized_termcolors = 256
-set background=light
 colorscheme solarized
 
 highlight SpellBad cterm=underline ctermfg=White ctermbg=NONE
@@ -111,15 +108,4 @@ elseif has('python3')
     map <C-I> :py3f /usr/share/clang/clang-format.py<cr>
     imap <C-I> <c-o>:py3f /usr/share/clang/clang-format.py<cr>
 endif
-
-function! Formatonsave()
-    let l:lines = 'all'
-    if has('python')
-        :pyf /usr/share/clang/clang-format.py
-    elseif has('python3')
-        :py3f /usr/share/clang/clang-format.py
-    endif
-endfunction
 "autocmd BufWritePre *.h,*.cc,*.cpp,*.C call Formatonsave()
-
-set background=light

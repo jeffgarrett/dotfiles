@@ -1,16 +1,3 @@
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vimrc
-
-" auto-install vim-plug
-if empty(glob(stdpath('data') . '/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
-endif
-call plug#begin(stdpath('data') . '/plugged')
-" Collection of common configurations for the Nvim LSP client
-Plug 'neovim/nvim-lspconfig'
 
 " Extensions to built-in LSP, for example, providing type inlay hints
 Plug 'nvim-lua/lsp_extensions.nvim'
@@ -23,11 +10,6 @@ Plug 'nvim-telescope/telescope.nvim'
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
 
-Plug 'overcache/NeoSolarized'
-call plug#end()
-
-syntax enable
-filetype plugin indent on
 
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -68,12 +50,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 EOF
 
 "set termguicolors
-colorscheme NeoSolarized
 
 nnoremap <silent> ff <cmd>lua vim.lsp.buf.formatting()<CR>
 
 autocmd Filetype c,cpp,proto set comments^=:///
-
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>

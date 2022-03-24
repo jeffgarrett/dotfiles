@@ -24,6 +24,9 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- Solarized color scheme
+  use "overcache/NeoSolarized"
+
   --   -- Simple plugins can be specified as strings
   --   use '9mm/vim-closer'
   --

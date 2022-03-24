@@ -6,15 +6,11 @@ local on_attach = function(client, bufnr)
 
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_buf_set_keymap(bufnr, "n", "g,", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    -- TODO: use new autocmd
-    vim.cmd [[
-    augroup format
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-    augroup end
-  ]]
+    vim.api.nvim_create_autocmd("BufWritePre", { buffer = bufnr, callback = vim.lsp.buf.formatting_sync })
   end
-  -- TODO: range formatting
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_buf_set_keymap(bufnr, "v", "g,", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  end
 end
 
 local runtime_path = vim.split(package.path, ";")

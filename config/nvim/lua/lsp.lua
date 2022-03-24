@@ -1,6 +1,9 @@
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
 
+  -- TODO
+  -- require'completion'.on_attach(client)
+
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_buf_set_keymap(bufnr, "n", "g,", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     -- TODO: use new autocmd
@@ -11,22 +14,33 @@ local on_attach = function(client, bufnr)
     augroup end
   ]]
   end
+  -- TODO: range formatting
 end
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+-- TODO: pyright
+-- TODO: rust_analyzer
+
 return {
   filetypes = {
     "bzl",
     "lua",
+    "c",
+    "cpp",
+    "objc",
+    "objcpp",
   },
   setup = function(lsp)
-    lsp.efm.setup {
+    lsp.clangd.setup {
       on_attach = on_attach,
+    }
+    lsp.efm.setup {
       init_options = { documentFormatting = true },
       filetypes = { "bzl", "lua" },
+      on_attach = on_attach,
       settings = {
         rootMarkers = { ".git/" },
         languages = {

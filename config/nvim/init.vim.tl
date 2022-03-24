@@ -1,15 +1,7 @@
-
-" Extensions to built-in LSP, for example, providing type inlay hints
-Plug 'nvim-lua/lsp_extensions.nvim'
-
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-
-"
-" Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
-
 
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -21,24 +13,6 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
-lua << EOF
--- nvim_lsp object
-local nvim_lsp = require'lspconfig'
-
--- function to attach completion when setting up lsp
-local on_attach = function(client)
-    require'completion'.on_attach(client)
-end
-
--- Enable rust_analyzer
--- nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
-
--- Enable clangd
-nvim_lsp.clangd.setup({ on_attach=on_attach })
-
--- Enable pyright
-nvim_lsp.pyright.setup({ on_attach=on_attach })
-
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -47,11 +21,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = true,
   }
 )
-EOF
 
 "set termguicolors
-
-nnoremap <silent> ff <cmd>lua vim.lsp.buf.formatting()<CR>
 
 autocmd Filetype c,cpp,proto set comments^=:///
 

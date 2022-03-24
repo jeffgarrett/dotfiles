@@ -11,7 +11,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
   }
 end
 
-local lsp = require "lsp"
 return require("packer").startup(function(use)
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
@@ -23,6 +22,9 @@ return require("packer").startup(function(use)
       require("lsp").setup(require "lspconfig")
     end,
   }
+
+  -- LSP extensions
+  use "nvim-lua/lsp_extensions.nvim"
 
   -- Solarized color scheme
   use "overcache/NeoSolarized"

@@ -93,19 +93,7 @@ match ExtraWhitespace /[^\t]\zs\t\+/
 "    return 0
 "  endif
 "endfunction
-"
-"
-"
+
 augroup ProjectSetup
     au BufRead,BufEnter /export/home/jeffga/git/genome_nova/*/*.{cc,h} set makeprg=./project_scripts/build
 augroup END
-
-
-if has('python')
-    map <C-I> :pyf /usr/share/clang/clang-format.py<cr>
-    imap <C-I> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
-elseif has('python3')
-    map <C-I> :py3f /usr/share/clang/clang-format.py<cr>
-    imap <C-I> <c-o>:py3f /usr/share/clang/clang-format.py<cr>
-endif
-"autocmd BufWritePre *.h,*.cc,*.cpp,*.C call Formatonsave()

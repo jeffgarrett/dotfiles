@@ -31,8 +31,6 @@ vim.cmd "colorscheme NeoSolarized"
 -- nnoremap <C-y> 5<C-y>
 -- "Store swap files centrally in ~/.vimtmp
 -- set directory=~/.vim/tmp
--- "Highlight and incremental search
--- set incsearch
 -- nmap <silent><leader>n :silent :nohlsearch<CR>
 -- "Highlight trailing whitespace with ,s
 -- "set listchars=tab:>-,trail:·,eol:$

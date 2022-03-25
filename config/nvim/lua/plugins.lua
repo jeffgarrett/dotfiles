@@ -1,3 +1,4 @@
+-- TODO: Boostrap should be in a separate script along with language install tools
 local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -48,13 +49,6 @@ return require("packer").startup(function(use)
   --     config = 'vim.cmd[[ALEEnable]]'
   --   }
   --
-  --   -- Plugins can have dependencies on other plugins
-  --   use {
-  --     'haorenW1025/completion-nvim',
-  --     opt = true,
-  --     requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
-  --   }
-  --
   --   -- Plugins can also depend on rocks from luarocks.org:
   --   use {
   --     'my/supercoolplugin',
@@ -101,11 +95,40 @@ return require("packer").startup(function(use)
     require("packer").sync()
   end
 
-  -- TODO: use new autocmd
-  vim.cmd [[
-    augroup packer_user_config
-      autocmd!
-      autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-  ]]
+  -- TODO: Why does this need sync instead of compile?
+  vim.api.nvim_create_autocmd("BufWritePost", { callback = require("packer").sync, pattern = "plugins.lua" })
 end)
+
+-- " Find files using Telescope command-line sugar.
+-- nnoremap <leader>ff <cmd>Telescope find_files<cr>
+-- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+-- nnoremap <leader>fb <cmd>Telescope buffers<cr>
+-- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+-- Plug 'nvim-lua/popup.nvim'
+-- Plug 'nvim-lua/plenary.nvim'
+-- Plug 'nvim-telescope/telescope.nvim'
+-- Plug 'mfussenegger/nvim-dap'
+--
+-- Plug 'simrat39/rust-tools.nvim'
+--
+-- " Completion framework
+-- Plug 'hrsh7th/nvim-cmp'
+--
+-- " LSP completion source for nvim-cmp
+-- Plug 'hrsh7th/cmp-nvim-lsp'
+--
+-- " Snippet completion source for nvim-cmp
+-- Plug 'hrsh7th/cmp-vsnip'
+--
+-- " Other usefull completion sources
+-- Plug 'hrsh7th/cmp-path'
+-- Plug 'hrsh7th/cmp-buffer'
+--
+-- " Snippet engine
+-- Plug 'hrsh7th/vim-vsnip'
+--
+-- " Fuzzy finder
+-- " Optional
+-- Plug 'nvim-lua/popup.nvim'
+-- Plug 'nvim-lua/plenary.nvim'
+-- Plug 'nvim-telescope/telescope.nvim'

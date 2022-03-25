@@ -1,12 +1,33 @@
--- Use a solarized light colorscheme
+-- Enable line numbers
+vim.opt.number = true
+
+-- Put signs in the line number area
+vim.opt.signcolumn = "number"
+
+-- Use a light GUI colorscheme
 vim.opt.background = "light"
+vim.opt.termguicolors = true
+
+-- Default configuration for NeoSolarized colorscheme:
+--   Font styles:
+--     vim.g.neosolarized_bold = true
+--     vim.g.neosolarized_italic = false
+--     vim.g.neosolarized_underline = true
+--   Appearance:
+--     vim.g.neosolarized_contrast = "normal"
+--     vim.g.neosolarized_diffmode = "normal"
+--     vim.g.neosolarized_termBoldAsBright = true
+--     vim.g.neosolarized_termtrans = false
+--     vim.g.neosolarized_visibility = "normal"
+--     vim.g.neosolarized_vertSplitBgTrans = true
+
+-- Use NeoSolarized colorscheme
 vim.cmd "colorscheme NeoSolarized"
 
 --autocmd Filetype c,cpp,proto set comments^=:///
---set wrap textwidth=72 ts=4 sw=4 et ai si nocp
+--set wrap textwidth=72 ts=4 sw=4 et si nocp
 -- set modeline
 -- " Doxygen comments
--- autocmd Filetype c,cpp set comments^=:///
 --
 -- "Swap '` as ` is more useful in mark-locating
 -- nnoremap ' `
@@ -15,9 +36,6 @@ vim.cmd "colorscheme NeoSolarized"
 -- let mapleader = ","
 -- "Increase the command/search history
 -- "set history=100000
---
--- " XXXX
--- runtime plugin/matchit.vim
 --
 -- "Shell-like command completion
 -- set wildmode=list:longest
@@ -41,7 +59,6 @@ vim.cmd "colorscheme NeoSolarized"
 -- nmap <F10> 1G=G
 -- imap <F10> <ESC>1G=Ga
 --
---
 -- set spell
 -- set spelllang=en
 --
@@ -49,20 +66,10 @@ vim.cmd "colorscheme NeoSolarized"
 -- set foldenable
 -- set fdm=syntax
 -- nnoremap <space> za
--- set wrap textwidth=72 ts=4 sw=4 et ai si nocp
 -- set grepprg=grep\ -nH\ $*
 -- set nocindent
--- let g:tex_flavor='latex'
--- let g:Tex_SmartKeyQuote=0
---
--- set nu
--- set t_Co=256
--- let s:solarized_termtrans = 1
--- let g:solarized_termcolors = 256
--- colorscheme solarized
 --
 -- highlight SpellBad cterm=underline ctermfg=White ctermbg=NONE
---
 --
 -- highlight ExtraWhitespace ctermbg=red guibg=red
 -- " Show trailing whitespace and spaces before a tab:
@@ -89,46 +96,6 @@ vim.cmd "colorscheme NeoSolarized"
 -- augroup ProjectSetup
 --     au BufRead,BufEnter /export/home/jeffga/git/genome_nova/*/*.{cc,h} set makeprg=./project_scripts/build
 -- augroup END
--- " Collection of common configurations for the Nvim LSP client
--- Plug 'neovim/nvim-lspconfig'
---
--- " Extensions to built-in LSP, for example, providing type inlay hints
--- Plug 'nvim-lua/lsp_extensions.nvim'
---
--- Plug 'nvim-lua/popup.nvim'
--- Plug 'nvim-lua/plenary.nvim'
--- Plug 'nvim-telescope/telescope.nvim'
--- Plug 'mfussenegger/nvim-dap'
---
--- "
--- " Autocompletion framework for built-in LSP
--- Plug 'nvim-lua/completion-nvim'
---
--- Plug 'overcache/NeoSolarized'
---
--- Plug 'simrat39/rust-tools.nvim'
---
--- " Completion framework
--- Plug 'hrsh7th/nvim-cmp'
---
--- " LSP completion source for nvim-cmp
--- Plug 'hrsh7th/cmp-nvim-lsp'
---
--- " Snippet completion source for nvim-cmp
--- Plug 'hrsh7th/cmp-vsnip'
---
--- " Other usefull completion sources
--- Plug 'hrsh7th/cmp-path'
--- Plug 'hrsh7th/cmp-buffer'
---
--- " Snippet engine
--- Plug 'hrsh7th/vim-vsnip'
---
--- " Fuzzy finder
--- " Optional
--- Plug 'nvim-lua/popup.nvim'
--- Plug 'nvim-lua/plenary.nvim'
--- Plug 'nvim-telescope/telescope.nvim'
 --
 -- " Set completeopt to have a better completion experience
 -- " :help completeopt
@@ -145,58 +112,6 @@ vim.cmd "colorscheme NeoSolarized"
 --     require'completion'.on_attach(client)
 -- end
 --
--- -- Enable rust_analyzer
--- nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
---
--- -- Enable clangd
--- nvim_lsp.clangd.setup({ on_attach=on_attach })
---
--- -- Enable pyright
--- nvim_lsp.pyright.setup({ on_attach=on_attach })
---
--- -- Enable diagnostics
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics, {
---     virtual_text = true,
---     signs = true,
---     update_in_insert = true,
---   }
--- )
---
--- local opts = {
---     tools = {
---         autoSetHints = true,
---         hover_with_actions = true,
---         runnables = {
---             use_telescope = true
---         },
---         inlay_hints = {
---             show_parameter_hints = false,
---             parameter_hints_prefix = "",
---             other_hints_prefix = "",
---         },
---     },
---
---     -- all the opts to send to nvim-lspconfig
---     -- these override the defaults set by rust-tools.nvim
---     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
---     server = {
---         -- on_attach is a callback called when the language server attachs to the buffer
---         -- on_attach = on_attach,
---         settings = {
---             -- to enable rust-analyzer settings visit:
---             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
---             ["rust-analyzer"] = {
---                 -- enable clippy on save
---                 checkOnSave = {
---                     command = "clippy"
---                 },
---             }
---         }
---     },
--- }
---
--- require('rust-tools').setup(opts)
 -- EOF
 --
 -- " Code navigation shortcuts
@@ -214,14 +129,9 @@ vim.cmd "colorscheme NeoSolarized"
 -- " Quick-fix
 -- nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 --
---
--- "set termguicolors
--- colorscheme NeoSolarized
---
 -- nnoremap <silent> ff <cmd>lua vim.lsp.buf.formatting()<CR>
 --
 -- autocmd Filetype c,cpp,proto set comments^=:///
---
 --
 -- " Find files using Telescope command-line sugar.
 -- nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -265,9 +175,6 @@ vim.cmd "colorscheme NeoSolarized"
 -- })
 -- EOF
 --
--- " have a fixed column for the diagnostics to appear in
--- " this removes the jitter when warnings/errors flow in
--- set signcolumn=yes
 --
 -- " Set updatetime for CursorHold
 -- " 300ms of no cursor movement to trigger CursorHold
@@ -292,22 +199,3 @@ vim.cmd "colorscheme NeoSolarized"
 --
 -- " Avoid showing extra messages when using completion
 -- set shortmess+=c
---
--- -- Enable diagnostics
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics, {
---     virtual_text = true,
---     signs = true,
---     update_in_insert = true,
---   }
--- )
---
--- "set termguicolors
---
--- autocmd Filetype c,cpp,proto set comments^=:///
---
--- " Find files using Telescope command-line sugar.
--- nnoremap <leader>ff <cmd>Telescope find_files<cr>
--- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
--- nnoremap <leader>fb <cmd>Telescope buffers<cr>
--- nnoremap <leader>fh <cmd>Telescope help_tags<cr>

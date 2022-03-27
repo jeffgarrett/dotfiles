@@ -7,8 +7,6 @@ require("packer").startup(function(use)
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
   -- Add indentation guides even on blank lines
   use "lukas-reineke/indent-blankline.nvim"
-  -- Add git related info in the signs columns and popups
-  use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   use "hrsh7th/nvim-cmp" -- Autocompletion plugin
   use "hrsh7th/cmp-nvim-lsp"
@@ -54,17 +52,6 @@ vim.g.indent_blankline_char = "┊"
 vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
-
--- Gitsigns
-require("gitsigns").setup {
-  signs = {
-    add = { text = "+" },
-    change = { text = "~" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
-  },
-}
 
 -- Telescope
 require("telescope").setup {
@@ -483,12 +470,6 @@ cmp.setup {
 --   -- Plugins can have post-install/update hooks
 --   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
 --
---   -- Use dependency and run lua function after load
---   use {
---     'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
---     config = function() require('gitsigns').setup() end
---   }
-
 -- " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 -- "nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 -- "nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>

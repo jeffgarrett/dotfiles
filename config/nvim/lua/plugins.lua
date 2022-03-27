@@ -120,6 +120,23 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- Add git related info in the signs columns and popups
+  use {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup {
+        signs = {
+          add = { text = "+" },
+          change = { text = "~" },
+          delete = { text = "_" },
+          topdelete = { text = "‾" },
+          changedelete = { text = "~" },
+        },
+      }
+    end,
+    requires = { "nvim-lua/plenary.nvim" },
+  }
+
   -- Status line and tab line
   use {
     "nvim-lualine/lualine.nvim",

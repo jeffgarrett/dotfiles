@@ -14,6 +14,8 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_buf_set_keymap(bufnr, "v", "g,", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
+
+  vim.api.nvim_create_autocmd("CursorHold", { buffer = bufnr, callback = vim.diagnostic.open_float })
 end
 
 vim.fn.sign_define("DiagnosticSignError", { text = "🔴", texthl = "DiagnosticSignError" })

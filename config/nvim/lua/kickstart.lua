@@ -16,9 +16,6 @@ require("packer").startup(function(use)
   use "L3MON4D3/LuaSnip" -- Snippets plugin
 end)
 
---Enable mouse mode
-vim.o.mouse = "a"
-
 --Enable break indent
 vim.o.breakindent = true
 
@@ -31,7 +28,6 @@ vim.o.smartcase = true
 
 --Decrease update time
 vim.o.updatetime = 250
-vim.wo.signcolumn = "yes"
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
@@ -424,8 +420,6 @@ cmp.setup {
 -- " Set updatetime for CursorHold
 -- " 300ms of no cursor movement to trigger CursorHold
 -- set updatetime=300
--- " Show diagnostic popup on cursor hover
--- " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 --
 -- " Goto previous/next diagnostic warning/error
 -- nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
@@ -450,9 +444,6 @@ cmp.setup {
 -- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 -- nnoremap <leader>fb <cmd>Telescope buffers<cr>
 -- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
--- Plug 'nvim-lua/popup.nvim'
--- Plug 'nvim-lua/plenary.nvim'
--- Plug 'nvim-telescope/telescope.nvim'
 -- Plug 'mfussenegger/nvim-dap'
 --
 -- Plug 'simrat39/rust-tools.nvim'

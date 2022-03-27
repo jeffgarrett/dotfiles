@@ -111,6 +111,15 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- Dim outside active context
+  use {
+    "folke/twilight.nvim",
+    config = function()
+      require("twilight").setup {}
+      vim.api.nvim_create_autocmd("BufEnter", { callback = require("twilight").enable })
+    end,
+  }
+
   -- Status line and tab line
   use {
     "nvim-lualine/lualine.nvim",

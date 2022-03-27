@@ -25,7 +25,7 @@ return require("packer").startup(function(use)
   }
 
   -- LSP extensions
-  -- use "nvim-lua/lsp_extensions.nvim"
+  use "nvim-lua/lsp_extensions.nvim"
 
   --   -- Post-install/update hook with neovim command
   use {
@@ -95,6 +95,13 @@ return require("packer").startup(function(use)
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
+    end,
+  }
+
+  use {
+    "lewis6991/spellsitter.nvim",
+    config = function()
+      require("spellsitter").setup()
     end,
   }
 

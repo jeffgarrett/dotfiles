@@ -25,44 +25,133 @@ return require("packer").startup(function(use)
   }
 
   -- LSP extensions
-  use "nvim-lua/lsp_extensions.nvim"
+  -- use "nvim-lua/lsp_extensions.nvim"
+
+  --   -- Post-install/update hook with neovim command
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+        ensure_installed = "maintained",
+        highlight = {
+          enable = true, -- false will disable the whole extension
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+          },
+        },
+        indent = {
+          enable = true,
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[]"] = "@class.outer",
+            },
+          },
+        },
+      }
+    end,
+    run = ":TSUpdate",
+  }
+
+  -- Additional textobjects for treesitter
+  use "nvim-treesitter/nvim-treesitter-textobjects"
+
+  -- Easily comment and uncomment
+  use {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  }
+
+  use {
+    "romgrk/nvim-treesitter-context",
+    requires = "nvim-treesitter/nvim-treesitter",
+  }
 
   -- Solarized color scheme
-  use "overcache/NeoSolarized"
+  use {
+    "overcache/NeoSolarized",
+    config = function()
+      -- Default configuration for NeoSolarized colorscheme:
+      --   Font styles:
+      --     vim.g.neosolarized_bold = true
+      --     vim.g.neosolarized_italic = false
+      --     vim.g.neosolarized_underline = true
+      --   Appearance:
+      --     vim.g.neosolarized_contrast = "normal"
+      --     vim.g.neosolarized_diffmode = "normal"
+      --     vim.g.neosolarized_termBoldAsBright = true
+      --     vim.g.neosolarized_termtrans = false
+      --     vim.g.neosolarized_visibility = "normal"
+      --     vim.g.neosolarized_vertSplitBgTrans = true
 
-  --   -- Simple plugins can be specified as strings
-  --   use '9mm/vim-closer'
-  --
-  --   -- Lazy loading:
-  --   -- Load on specific commands
-  --   use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
-  --
-  --   -- Load on an autocommand event
-  --   use {'andymass/vim-matchup', event = 'VimEnter'}
-  --
-  --   -- Plugins can have post-install/update hooks
-  --   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
-  --
-  --   -- Post-install/update hook with neovim command
-  --   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  --
-  --   -- Post-install/update hook with call of vimscript function with argument
-  --   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
-  --
-  --   -- Use specific branch, dependency and run lua file after load
-  --   use {
-  --     'glepnir/galaxyline.nvim', branch = 'main', config = function() require'statusline' end,
-  --     requires = {'kyazdani42/nvim-web-devicons'}
-  --   }
-  --
-  --   -- Use dependency and run lua function after load
-  --   use {
-  --     'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
-  --     config = function() require('gitsigns').setup() end
-  --   }
-  --
-  --   -- You can specify multiple plugins in a single call
-  --   use {'tjdevries/colorbuddy.vim', {'nvim-treesitter/nvim-treesitter', opt = true}}
+      -- Use NeoSolarized colorscheme
+      vim.cmd "colorscheme NeoSolarized"
+    end,
+  }
+  -- use {
+  --   "shaunsingh/solarized.nvim",
+  --   config = function()
+  --     require("solarized").set()
+  --     vim.cmd "colorscheme solarized"
+  --   end,
+  -- }
+
+  -- Status line and tab line
+  use {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup {
+        options = {
+          theme = "solarized",
+        },
+        sections = {
+          lualine_c = {
+            { require("nvim-treesitter").statusline },
+          },
+        },
+        tabline = {
+          lualine_a = { "buffers" },
+        },
+      }
+    end,
+    requires = { "kyazdani42/nvim-web-devicons", "nvim-treesitter/nvim-treesitter" },
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -73,37 +162,3 @@ return require("packer").startup(function(use)
   -- TODO: Why does this need sync instead of compile?
   vim.api.nvim_create_autocmd("BufWritePost", { callback = require("packer").sync, pattern = "plugins.lua" })
 end)
-
--- " Find files using Telescope command-line sugar.
--- nnoremap <leader>ff <cmd>Telescope find_files<cr>
--- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
--- nnoremap <leader>fb <cmd>Telescope buffers<cr>
--- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
--- Plug 'nvim-lua/popup.nvim'
--- Plug 'nvim-lua/plenary.nvim'
--- Plug 'nvim-telescope/telescope.nvim'
--- Plug 'mfussenegger/nvim-dap'
---
--- Plug 'simrat39/rust-tools.nvim'
---
--- " Completion framework
--- Plug 'hrsh7th/nvim-cmp'
---
--- " LSP completion source for nvim-cmp
--- Plug 'hrsh7th/cmp-nvim-lsp'
---
--- " Snippet completion source for nvim-cmp
--- Plug 'hrsh7th/cmp-vsnip'
---
--- " Other usefull completion sources
--- Plug 'hrsh7th/cmp-path'
--- Plug 'hrsh7th/cmp-buffer'
---
--- " Snippet engine
--- Plug 'hrsh7th/vim-vsnip'
---
--- " Fuzzy finder
--- " Optional
--- Plug 'nvim-lua/popup.nvim'
--- Plug 'nvim-lua/plenary.nvim'
--- Plug 'nvim-telescope/telescope.nvim'

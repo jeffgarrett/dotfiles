@@ -1,12 +1,9 @@
-treesitter (folding)
 telescope
-
 
 clangd: tidy+iwyu
 tree
 completion: nvim-cmp
 gitsigns
-lualine
 nvim-lspinstall, lspsaga
 
 Render gitmoji

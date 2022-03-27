@@ -90,7 +90,7 @@ return require("packer").startup(function(use)
   -- Additional textobjects for treesitter
   use "nvim-treesitter/nvim-treesitter-textobjects"
 
-  -- Easily comment and uncomment
+  -- Easily comment and uncomment with "gc"
   use {
     "numToStr/Comment.nvim",
     config = function()
@@ -105,32 +105,11 @@ return require("packer").startup(function(use)
 
   -- Solarized color scheme
   use {
-    "overcache/NeoSolarized",
+    "ishan9299/nvim-solarized-lua",
     config = function()
-      -- Default configuration for NeoSolarized colorscheme:
-      --   Font styles:
-      --     vim.g.neosolarized_bold = true
-      --     vim.g.neosolarized_italic = false
-      --     vim.g.neosolarized_underline = true
-      --   Appearance:
-      --     vim.g.neosolarized_contrast = "normal"
-      --     vim.g.neosolarized_diffmode = "normal"
-      --     vim.g.neosolarized_termBoldAsBright = true
-      --     vim.g.neosolarized_termtrans = false
-      --     vim.g.neosolarized_visibility = "normal"
-      --     vim.g.neosolarized_vertSplitBgTrans = true
-
-      -- Use NeoSolarized colorscheme
-      vim.cmd "colorscheme NeoSolarized"
+      vim.cmd "colorscheme solarized"
     end,
   }
-  -- use {
-  --   "shaunsingh/solarized.nvim",
-  --   config = function()
-  --     require("solarized").set()
-  --     vim.cmd "colorscheme solarized"
-  --   end,
-  -- }
 
   -- Status line and tab line
   use {

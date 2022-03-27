@@ -36,9 +36,6 @@ vim.wo.signcolumn = "yes"
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
---Enable Comment.nvim
-require("Comment").setup()
-
 --Remap space as leader key
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
@@ -278,7 +275,6 @@ cmp.setup {
 --autocmd Filetype c,cpp,proto set comments^=:///
 --set wrap textwidth=72 ts=4 sw=4 et si nocp
 -- set modeline
--- " Doxygen comments
 --
 -- "Swap '` as ` is more useful in mark-locating
 -- nnoremap ' `
@@ -381,8 +377,6 @@ cmp.setup {
 -- nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 --
 -- nnoremap <silent> ff <cmd>lua vim.lsp.buf.formatting()<CR>
---
--- autocmd Filetype c,cpp,proto set comments^=:///
 --
 -- " Find files using Telescope command-line sugar.
 -- nnoremap <leader>ff <cmd>Telescope find_files<cr>

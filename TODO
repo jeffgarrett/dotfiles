@@ -1,5 +1,8 @@
 telescope
 
+leader == space
+localleader == semicolon?
+
 clangd: tidy+iwyu
 tree
 completion: nvim-cmp

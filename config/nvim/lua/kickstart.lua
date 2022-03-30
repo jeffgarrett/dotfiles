@@ -5,53 +5,7 @@ require("packer").startup(function(use)
   -- UI to select things (files, grep results, open buffers...)
   use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } }
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-  -- Add indentation guides even on blank lines
-  use "lukas-reineke/indent-blankline.nvim"
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use "hrsh7th/nvim-cmp" -- Autocompletion plugin
-  use "hrsh7th/cmp-nvim-lsp"
-  use "saadparwaiz1/cmp_luasnip"
-  use "L3MON4D3/LuaSnip" -- Snippets plugin
 end)
-
---Enable break indent
-vim.o.breakindent = true
-
---Save undo history
-vim.opt.undofile = true
-
---Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
---Decrease update time
-vim.o.updatetime = 250
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
-
---Remap space as leader key
-vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
---Remap for dealing with word wrap
-vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
-
--- Highlight on yank
-vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]]
-
---Map blankline
-vim.g.indent_blankline_char = "┊"
-vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
-vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 -- Telescope
 require("telescope").setup {
@@ -124,12 +78,6 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
--- Diagnostic keymaps
-vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true })
-
 -- LSP settings
 local lspconfig = require "lspconfig"
 local on_attach = function(_, bufnr)
@@ -175,70 +123,16 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- luasnip setup
-local luasnip = require "luasnip"
-
--- nvim-cmp setup
-local cmp = require "cmp"
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ["<Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ["<S-Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-  },
-}
-
 --autocmd Filetype c,cpp,proto set comments^=:///
---set wrap textwidth=72 ts=4 sw=4 et si nocp
--- set modeline
 --
 -- "Swap '` as ` is more useful in mark-locating
 -- nnoremap ' `
 -- nnoremap ` '
--- "Default leader is \ which is inconvenient
--- let mapleader = ","
 -- "Increase the command/search history
 -- "set history=100000
 --
 -- "Shell-like command completion
 -- set wildmode=list:longest
--- "Smart (usually case-insensitive) searching
--- set ignorecase
--- set smartcase
 -- "When scrolling, include context
 -- set scrolloff=5
 -- "Single-step scroll faster
@@ -260,8 +154,6 @@ cmp.setup {
 -- set spelllang=en
 --
 -- set tabpagemax=40
--- set foldenable
--- set fdm=syntax
 -- nnoremap <space> za
 -- set grepprg=grep\ -nH\ $*
 -- set nocindent
@@ -370,10 +262,6 @@ cmp.setup {
 -- })
 -- EOF
 --
---
--- " Set updatetime for CursorHold
--- " 300ms of no cursor movement to trigger CursorHold
--- set updatetime=300
 --
 -- " Goto previous/next diagnostic warning/error
 -- nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>

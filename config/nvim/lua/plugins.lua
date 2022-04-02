@@ -86,7 +86,7 @@ return require("packer").startup(function(use)
 
   use "tpope/vim-fugitive" -- Git commands in nvim
   use "tpope/vim-rhubarb" -- Fugitive-companion to interact with github
-  use "ludovicchabant/vim-gutentags" -- Automatic tags management
+  -- use "ludovicchabant/vim-gutentags" -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use {
     "nvim-telescope/telescope.nvim",

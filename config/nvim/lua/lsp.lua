@@ -40,12 +40,13 @@ return {
     "objcpp",
   },
   setup = function(lsp)
+    require("lspconfig").bashls.setup {}
     lsp.clangd.setup {
       on_attach = on_attach,
     }
     lsp.efm.setup {
       init_options = { documentFormatting = true },
-      filetypes = { "bzl", "lua" },
+      filetypes = { "bzl", "lua", "sh" },
       on_attach = on_attach,
       settings = {
         rootMarkers = { ".git/" },
@@ -61,6 +62,9 @@ return {
           },
           lua = {
             { formatCommand = "stylua --search-parent-directories -", formatStdin = true },
+          },
+          sh = {
+            { formatCommand = "shfmt -i 2", formatStdin = true },
           },
         },
       },

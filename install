@@ -19,10 +19,20 @@ function install {
   )
 }
 
+## Language package managers
+
+### npm
+mkdir -p ~/.local/n/bin
+curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o ~/.local/n/bin/n
+chmod +x ~/.local/n/bin/n
+N_PREFIX=~/.local/n N_CACHE_PREFIX=~/.cache ~/.local/n/bin/n lts
+
 # Only necessary client-side
-install https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/FiraCode.zip \
-  ~/.local/share/fonts/nerd-fonts-fira-code unzip
-fc-cache -f
+if [ "x$1" = "xclient" ] ; then
+  install https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/FiraCode.zip \
+    ~/.local/share/fonts/nerd-fonts-fira-code unzip
+  fc-cache -f
+fi
 
 install https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz \
   ~/.local/nvim-nightly tar --strip-components=1 -xvf
@@ -32,10 +42,10 @@ go install github.com/mattn/efm-langserver@latest
 #
 # Shell editor support
 #
-npm install --global --no-progress --silent bash-language-server
+PATH=~/.local/n/bin:$PATH npm install --global --no-progress --silent bash-language-server
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
-cabal update
-cabal install ShellCheck
+#cabal update
+#cabal install ShellCheck
 
 #
 # Lua editor support
@@ -44,4 +54,5 @@ install https://github.com/sumneko/lua-language-server/releases/download/2.6.7/l
   ~/.local/lua-language-server tar -xvf
 cargo install --quiet stylua
 
+#ln -s .dotter/$(hostname).toml .dotter/local.toml
 cargo install --quiet dotter

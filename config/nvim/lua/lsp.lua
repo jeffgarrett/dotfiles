@@ -64,7 +64,7 @@ return {
             { formatCommand = "stylua --search-parent-directories -", formatStdin = true },
           },
           sh = {
-            { formatCommand = "shfmt -i 2", formatStdin = true },
+            { formatCommand = "shfmt -i 2 -ci -bn -s", formatStdin = true },
           },
         },
       },

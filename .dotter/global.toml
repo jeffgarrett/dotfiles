@@ -1,6 +1,9 @@
 [alacritty.files]
 "alacritty.yml" = "~/.config/alacritty/alacritty.yml"
 
+[git.files]
+"config/git" = "~/.config/git"
+
 [nvim.files]
 "config/nvim" = "~/.config/nvim"
 

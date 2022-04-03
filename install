@@ -27,8 +27,12 @@ curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o ~/.local/n/bin/n
 chmod +x ~/.local/n/bin/n
 N_PREFIX=~/.local/n N_CACHE_PREFIX=~/.cache ~/.local/n/bin/n lts
 
+## Command line utilities
+cargo install --quiet fd-find
+cargo install --quiet ripgrep
+
 # Only necessary client-side
-if [ "x$1" = "xclient" ] ; then
+if [ "x$1" = "xclient" ]; then
   install https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/FiraCode.zip \
     ~/.local/share/fonts/nerd-fonts-fira-code unzip
   fc-cache -f

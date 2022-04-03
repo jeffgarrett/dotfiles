@@ -1,0 +1,47 @@
+#!/bin/bash -ex
+
+function install {
+  url="$1"
+  dir="$2"
+  ext="$3"
+  arg="$4 $5"
+
+  tmp="$(mktemp -d)"
+  trap "rm -rf $tmp" EXIT
+
+  curl -s -L "$url" -o "$tmp/archive"
+  mkdir "$tmp/extract"
+  (
+    cd "$tmp/extract"
+    "$ext" $arg ../archive
+    mkdir -p "$dir/"
+    rsync --delete -av ./ "$dir/"
+  )
+}
+
+# Only necessary client-side
+install https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/FiraCode.zip \
+  ~/.local/share/fonts/nerd-fonts-fira-code unzip
+fc-cache -f
+
+install https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz \
+  ~/.local/nvim-nightly tar --strip-components=1 -xvf
+
+go install github.com/mattn/efm-langserver@latest
+
+#
+# Shell editor support
+#
+npm install --global --no-progress --silent bash-language-server
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
+cabal update
+cabal install ShellCheck
+
+#
+# Lua editor support
+#
+install https://github.com/sumneko/lua-language-server/releases/download/2.6.7/lua-language-server-2.6.7-linux-x64.tar.gz \
+  ~/.local/lua-language-server tar -xvf
+cargo install --quiet stylua
+
+cargo install --quiet dotter

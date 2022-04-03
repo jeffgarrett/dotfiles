@@ -1,1 +1,1 @@
-packages = ["git", "nvim", "stylua", "zsh"]
+packages = ["gdb", "git", "nvim", "stylua", "zsh"]

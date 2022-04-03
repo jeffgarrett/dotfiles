@@ -1,6 +1,9 @@
 [alacritty.files]
 "alacritty.yml" = "~/.config/alacritty/alacritty.yml"
 
+[gdb.files]
+"config/gdb" = "~/.config/gdb"
+
 [git.files]
 "config/git" = "~/.config/git"
 

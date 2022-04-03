@@ -1,1 +1,1 @@
-packages = ["alacritty", "gdb", "git", "nvim", "stylua", "zsh"]
+packages = ["alacritty", "nvim", "stylua", "zsh"]

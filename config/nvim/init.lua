@@ -1,2 +1,2 @@
-require "settings"
+require("settings").setup {}
 require "plugins"

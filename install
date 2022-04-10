@@ -44,6 +44,12 @@ install https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.
 go install github.com/mattn/efm-langserver@latest
 
 #
+# Protobuf editor support
+#
+install https://github.com/bufbuild/buf/releases/download/v1.3.1/buf-Linux-x86_64.tar.gz \
+  ~/.local/buf tar --strip-components=1 -xvf
+
+#
 # Shell editor support
 #
 PATH=~/.local/n/bin:$PATH npm install --global --no-progress --silent bash-language-server

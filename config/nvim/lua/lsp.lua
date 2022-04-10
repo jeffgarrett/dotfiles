@@ -63,6 +63,10 @@ return {
           lua = {
             { formatCommand = "stylua --search-parent-directories -", formatStdin = true },
           },
+          proto = {
+            { formatCommand = "buf format ${INPUT}" },
+            { lintCommand = "buf lint ${INPUT}" },
+          },
           sh = {
             { formatCommand = "shfmt -i 2 -ci -bn -s", formatStdin = true },
           },

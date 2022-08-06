@@ -174,7 +174,7 @@ return require("packer").startup(function(use)
     config = function()
       require("nvim-treesitter.configs").setup {
         -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-        ensure_installed = "maintained",
+        ensure_installed = "all",
         highlight = {
           enable = true, -- false will disable the whole extension
         },
@@ -262,13 +262,13 @@ return require("packer").startup(function(use)
   }
 
   -- Dim outside active context
-  use {
-    "folke/twilight.nvim",
-    config = function()
-      require("twilight").setup {}
-      vim.api.nvim_create_autocmd("BufEnter", { callback = require("twilight").enable })
-    end,
-  }
+  -- use {
+  --   "folke/twilight.nvim",
+  --   config = function()
+  --     require("twilight").setup {}
+  --     vim.api.nvim_create_autocmd("BufEnter", { callback = require("twilight").enable })
+  --   end,
+  -- }
 
   -- Add git related info in the signs columns and popups
   use {

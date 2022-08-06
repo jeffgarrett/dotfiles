@@ -19,6 +19,14 @@ function install {
   )
 }
 
+# cargo-binstall
+tmp="$(mktemp -d)"
+trap "rm -rf \"$tmp\"" EXIT
+curl -sL https://github.com/ryankurte/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-gnu.tgz \
+  | tar -C "$tmp" -xz cargo-binstall
+rsync -a "$tmp"/cargo-binstall ~/.local/bin
+rm -rf "$tmp"
+
 ## Language package managers
 
 ### npm

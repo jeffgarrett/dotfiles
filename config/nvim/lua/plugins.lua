@@ -324,6 +324,11 @@ return require("packer").startup(function(use)
     end,
     requires = { "kyazdani42/nvim-web-devicons", "nvim-treesitter/nvim-treesitter" },
   }
+  use "simrat39/rust-tools.nvim"
+
+  -- Debugging
+  use "nvim-lua/plenary.nvim"
+  use "mfussenegger/nvim-dap"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

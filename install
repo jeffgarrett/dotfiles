@@ -30,6 +30,9 @@ rm -rf "$tmp"
 # cargo-nextest
 cargo binstall --secure --no-confirm --log-level=error cargo-nextest
 
+# rust-analyzer
+ln -sf ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.local/bin
+
 ## Language package managers
 
 ### npm

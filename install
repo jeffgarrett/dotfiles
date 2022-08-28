@@ -33,6 +33,14 @@ cargo binstall --secure --no-confirm --log-level=error cargo-nextest
 # rust-analyzer
 ln -sf ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.local/bin
 
+# wezterm
+tmp="$(mktemp -d)"
+trap "rm -rf \"$tmp\"" EXIT
+curl -sL https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb \
+  -o "$tmp"/wezterm-nightly.Ubuntu22.04.deb
+sudo apt install -y "$tmp"/wezterm-nightly.Ubuntu22.04.deb
+rm -rf "$tmp"
+
 ## Language package managers
 
 ### npm

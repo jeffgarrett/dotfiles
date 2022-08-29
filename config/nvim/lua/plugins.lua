@@ -261,15 +261,6 @@ return require("packer").startup(function(use)
     end,
   }
 
-  -- Dim outside active context
-  -- use {
-  --   "folke/twilight.nvim",
-  --   config = function()
-  --     require("twilight").setup {}
-  --     vim.api.nvim_create_autocmd("BufEnter", { callback = require("twilight").enable })
-  --   end,
-  -- }
-
   -- Add git related info in the signs columns and popups
   use {
     "lewis6991/gitsigns.nvim",
@@ -330,7 +321,10 @@ return require("packer").startup(function(use)
   use "nvim-lua/plenary.nvim"
   use "mfussenegger/nvim-dap"
 
-  use "stevearc/dressing.nvim"
+  require("plugins.dressing").startup(use)
+  require("plugins.notify").startup(use)
+  require("plugins.project").startup(use)
+  require("plugins.tree").startup(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

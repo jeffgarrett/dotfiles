@@ -4,11 +4,11 @@ function M.startup(use)
   use {
     "ahmedkhalf/project.nvim",
     config = function()
-      -- local defaults = require("project_nvim.config").defaults.patterns
-      -- table.insert(patterns, "WORKSPACE")
+      local patterns = require("project_nvim.config").defaults.patterns
+      table.insert(patterns, "WORKSPACE")
       require("project_nvim").setup {
         -- ignore_lsp = { "efm" },
-        -- patterns = patterns,
+        patterns = patterns,
         silent_chdir = false,
       }
       require("telescope").load_extension "projects"

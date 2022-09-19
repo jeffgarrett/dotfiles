@@ -82,6 +82,3 @@ go install mvdan.cc/sh/v3/cmd/shfmt@latest
 install https://github.com/sumneko/lua-language-server/releases/download/2.6.7/lua-language-server-2.6.7-linux-x64.tar.gz \
   ~/.local/lua-language-server tar -xvf
 cargo install --quiet stylua
-
-#ln -s .dotter/$(hostname).toml .dotter/local.toml
-cargo install --quiet dotter

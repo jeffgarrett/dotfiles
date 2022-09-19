@@ -1,18 +1,32 @@
 #!/bin/sh -ex
 
+# Install or update rustup
+rustup_dir="${HOME}/.cargo/bin"
+rustup="${rustup_dir}/rustup"
+
+if ! [ -x "${rustup}" ]; then
+  echo "installing rustup"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path --component miri --component rust-analyzer --default-toolchain nightly
+else
+  echo "updating rustup"
+  "${rustup}" self update
+fi
+source "${HOME}/.cargo/env"
+
+# Install stable toolchain as well
+rustup toolchain install stable
+#rustup default nightly
+
 # Install or update dotter
 dotter_dir="${HOME}/.cargo/bin"
 dotter="${dotter_dir}/dotter"
-dotter_tmp="${dotter_dir}/.dotter.tmp"
 
 if ! [ -x "${dotter}" ]; then
   echo "installing dotter"
-  mkdir -p "${dotter_dir}"
 else
   echo "updating dotter"
 fi
-curl -sL https://github.com/SuperCuber/dotter/releases/latest/download/dotter -o "${dotter_tmp}"
-chmod +x "${dotter_tmp}"
-mv "${dotter_tmp}" "${dotter}"
+
+cargo install --quiet dotter
 
 exec "${dotter}" deploy

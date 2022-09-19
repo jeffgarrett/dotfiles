@@ -19,17 +19,6 @@ function install {
   )
 }
 
-# cargo-binstall
-tmp="$(mktemp -d)"
-trap "rm -rf \"$tmp\"" EXIT
-curl -sL https://github.com/ryankurte/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-gnu.tgz \
-  | tar -C "$tmp" -xz cargo-binstall
-rsync -a "$tmp"/cargo-binstall ~/.cargo/bin
-rm -rf "$tmp"
-
-# cargo-nextest
-cargo binstall --secure --no-confirm --log-level=error cargo-nextest
-
 # rust-analyzer
 ln -sf ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.local/bin
 
@@ -48,10 +37,6 @@ mkdir -p ~/.local/n/bin
 curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o ~/.local/n/bin/n
 chmod +x ~/.local/n/bin/n
 N_PREFIX=~/.local/n N_CACHE_PREFIX=~/.cache ~/.local/n/bin/n lts
-
-## Command line utilities
-cargo install --quiet fd-find
-cargo install --quiet ripgrep
 
 install https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/FiraCode.zip \
   ~/.local/share/fonts/nerd-fonts-fira-code unzip
@@ -81,4 +66,3 @@ go install mvdan.cc/sh/v3/cmd/shfmt@latest
 #
 install https://github.com/sumneko/lua-language-server/releases/download/2.6.7/lua-language-server-2.6.7-linux-x64.tar.gz \
   ~/.local/lua-language-server tar -xvf
-cargo install --quiet stylua

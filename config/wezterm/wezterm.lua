@@ -10,11 +10,11 @@
 -- },
 
 local wezterm = require "wezterm"
-local color_scheme = 'Solarized (light) (terminal.sexy)'
+local color_scheme = "Solarized (light) (terminal.sexy)"
 local colors = wezterm.color.get_builtin_schemes()[color_scheme]
 -- set -g status-fg colour245 # base1
 
-wezterm.on('update-status', function(window, pane)
+wezterm.on("update-status", function(window, pane)
   -- local date = wezterm.strftime '%Y-%m-%d %H:%M:%S'
 
   -- Make it italic and underlined
@@ -23,23 +23,22 @@ wezterm.on('update-status', function(window, pane)
   --   { Attribute = { Italic = true } },
   --   { Text = 'Hello ' .. date },
   -- })
-  local time = wezterm.strftime ' %H:%M:%S '
-  local date = wezterm.strftime ' %d-%b-%y '
+  local time = wezterm.strftime " %H:%M:%S "
+  local date = wezterm.strftime " %d-%b-%y "
   window:set_right_status(wezterm.format {
-    { Foreground = { Color = colors.foreground }},
-    { Background = { Color = colors.background }},
-    { Text = '' },
-    { Foreground = { Color = colors.background }},
-    { Background = { Color = colors.foreground }},
+    { Foreground = { Color = colors.foreground } },
+    { Background = { Color = colors.background } },
+    { Text = "" },
+    { Foreground = { Color = colors.background } },
+    { Background = { Color = colors.foreground } },
     { Text = time },
-    { Foreground = { Color = colors.background }},
-    { Background = { Color = colors.foreground }},
-    { Text = '' },
-    { Foreground = { Color = colors.foreground }},
-    { Background = { Color = colors.background }},
+    { Foreground = { Color = colors.background } },
+    { Background = { Color = colors.foreground } },
+    { Text = "" },
+    { Foreground = { Color = colors.foreground } },
+    { Background = { Color = colors.background } },
     { Text = date },
-  });
-
+  })
 end)
 
 return {
@@ -53,11 +52,11 @@ return {
     tab_bar = {
       background = colors.background,
       foreground = colors.foreground,
--- # Current window status
--- set -g window-status-current-style fg=white,bg=colour33
+      -- # Current window status
+      -- set -g window-status-current-style fg=white,bg=colour33
       active_tab = {
         fg_color = colors.background,
-        bg_color = 'blue',
+        bg_color = "blue",
       },
     },
   },
@@ -65,6 +64,12 @@ return {
   font_size = 16,
   tab_bar_at_bottom = true,
   use_fancy_tab_bar = false,
+  window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+  },
 }
 
 -- # Basic status bar colors

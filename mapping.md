@@ -1,3 +1,5 @@
+brew install lua-language-server
+brew install efm-langserver
 brew tap homebrew/cask-fonts && brew install --cask font-fira-code-nerd-font
 
 apps > windows > tabs

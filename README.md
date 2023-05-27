@@ -20,6 +20,10 @@ On Debian/Ubuntu, sudo apt install python3-venv
    pip install -r ${DOTFILES}/requirements.txt
    ```
 3. Create an inventory file:
+   ```sh
+   # Edit as necessary
+   cp ${DOTFILES}/inventory-template.yaml ${DOTFILES}/inventory.yaml
+   ``` 
 
 
 

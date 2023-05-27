@@ -10,10 +10,10 @@ On Debian/Ubuntu, sudo apt install python3-venv
 
 1. Clone this repository to ~/.dotfiles
 2. Create a virtual environment:
-   1. python3 -m venv ~/.dotfiles/env
-   2. source ~/.dotfiles/env/bin/activate
-   3. pip install -r ~/.dotfiles/requirements.txt
-   4. `export ANSIBLE_CONFIG=~/.dotfiles/ansible.cfg`
+   a. python3 -m venv ~/.dotfiles/env
+   b. source ~/.dotfiles/env/bin/activate
+   c. pip install -r ~/.dotfiles/requirements.txt
+   d. `export ANSIBLE_CONFIG=~/.dotfiles/ansible.cfg`
 3. Create an inventory file:
 
 

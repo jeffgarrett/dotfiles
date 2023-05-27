@@ -13,6 +13,9 @@ On Debian/Ubuntu, sudo apt install python3-venv
   a. python3 -m venv ~/.dotfiles/env
   b. source ~/.dotfiles/env/bin/activate
   c. pip install -r ~/.dotfiles/requirements.txt
+  d. `export ANSIBLE_CONFIG=~/.dotfiles/ansible.cfg`
+3. Create an inventory file:
+
 
 
 # OLD

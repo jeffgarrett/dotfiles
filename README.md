@@ -2,6 +2,23 @@
 
 ## Requirements
 
+Python with venv
+
+On Debian/Ubuntu, sudo apt install python3-venv
+
+## Initial setup
+
+1. Clone this repository to ~/.dotfiles
+2. Create a virtual environment:
+  a. python3 -m venv ~/.dotfiles/env
+  b. source ~/.dotfiles/env/bin/activate
+  c. pip install -r ~/.dotfiles/requirements.txt
+
+
+# OLD
+
+## Requirements
+
 Install
  * FiraCode Nerd Font
 

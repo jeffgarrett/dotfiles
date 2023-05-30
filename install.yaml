@@ -1,0 +1,26 @@
+- hosts: all
+  tasks:
+    - name: Configure git
+      ansible.builtin.copy:
+        src: 'config/git/config'
+        dest: '~/.config/git/config'
+
+    - name: Configure wezterm
+      ansible.builtin.copy:
+        src: 'config/wezterm/wezterm.lua'
+        dest: '~/.config/wezterm/wezterm.lua'
+      when: gui
+
+#[gdb.files]
+## xdg_config_home support was added in 2020
+## auto-load path is the work path
+#"gdbinit" = "~/.gdbinit"
+#
+#[nvim.files]
+#"config/nvim" = "~/.config/nvim"
+#
+#[stylua.files]
+#"config/stylua" = "~/.config/stylua"
+#
+#[zsh.files]
+#"zshenv" = "~/.zshenv"

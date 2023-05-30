@@ -24,6 +24,14 @@ On Debian/Ubuntu, sudo apt install python3-venv
    # Edit as necessary
    cp ${DOTFILES}/inventory-template.yaml ${DOTFILES}/inventory.yaml
    ``` 
+4. Run ansible to check first
+   ```sh
+   ansible-playbook --check --diff ansible/playbooks/install.yaml
+   ```
+5. Run ansible
+   ```
+   ansible-playbook ansible/playbooks/install.yaml
+   ```
 
 
 

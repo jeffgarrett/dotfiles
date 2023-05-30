@@ -8,9 +8,14 @@
 --   font = wezterm.font "FiraCode Nerd Font",
 --   font_size = 14,
 -- },
+local wezterm = require 'wezterm'
 
-local wezterm = require "wezterm"
-local color_scheme = "Solarized (light) (terminal.sexy)"
+local config = {}
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
+
+local color_scheme = 'Solarized (light) (terminal.sexy)'
 local colors = wezterm.color.get_builtin_schemes()[color_scheme]
 -- set -g status-fg colour245 # base1
 

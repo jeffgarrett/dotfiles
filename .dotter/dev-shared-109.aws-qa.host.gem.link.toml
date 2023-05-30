@@ -1,1 +1,0 @@
-packages = ["gdb", "git", "nvim", "stylua", "wezterm", "zsh"]

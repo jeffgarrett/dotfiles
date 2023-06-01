@@ -4,11 +4,13 @@
       ansible.builtin.copy:
         src: 'config/git/config'
         dest: '~/.config/git/config'
+        backup: true
 
     - name: Configure wezterm
       ansible.builtin.copy:
         src: 'config/wezterm/wezterm.lua'
         dest: '~/.config/wezterm/wezterm.lua'
+        backup: true
       when: gui
 
 #[nvim.files]

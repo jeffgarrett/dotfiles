@@ -3,4 +3,5 @@ all:
     localhost:
       ansible_connection: local
       ansible_python_interpreter: "{{ansible_playbook_python}}"
-      gui: false
+      email: "jeff@jgarrett.org"
+      gui: true

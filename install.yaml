@@ -1,8 +1,8 @@
 - hosts: all
   tasks:
     - name: Configure git
-      ansible.builtin.copy:
-        src: 'config/git/config'
+      ansible.builtin.template:
+        src: 'config/git/config.j2'
         dest: '~/.config/git/config'
         backup: true
 

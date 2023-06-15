@@ -1,3 +1,0 @@
-- name: Configure wezterm
-    ansible.builtin.debug:
-    msg: Debug for configure wezterm

@@ -1,0 +1,9 @@
+- name: Configure wezterm A
+  ansible.builtin.debug:
+    msg: Debug for configure wezterm
+
+- name: Configure wezterm
+  ansible.builtin.copy:
+    src: 'wezterm.lua'
+    dest: '~/.config/wezterm/wezterm.lua'
+    backup: true

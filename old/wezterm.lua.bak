@@ -1,0 +1,12 @@
+local wezterm = require 'wezterm'
+
+local config = {}
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
+
+local color_scheme = 'Solarized (light) (terminal.sexy)'
+
+return {
+  color_scheme = color_scheme,
+}

@@ -4,6 +4,6 @@
 
 - name: Configure wezterm
   ansible.builtin.copy:
-    src: 'wezterm.lua'
-    dest: '~/.config/wezterm/wezterm.lua'
+    src: "wezterm.lua"
+    dest: "{{ wezterm_config_home }}/wezterm.lua"
     backup: true

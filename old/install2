@@ -16,17 +16,3 @@ source "${HOME}/.cargo/env"
 # Install stable toolchain as well
 rustup toolchain install stable
 #rustup default nightly
-
-# Install or update dotter
-dotter_dir="${HOME}/.cargo/bin"
-dotter="${dotter_dir}/dotter"
-
-if ! [ -x "${dotter}" ]; then
-  echo "installing dotter"
-else
-  echo "updating dotter"
-fi
-
-cargo install --quiet dotter
-
-exec "${dotter}" deploy

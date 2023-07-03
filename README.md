@@ -32,3 +32,10 @@ On Debian/Ubuntu, sudo apt install python3-venv
    ```
    ansible-playbook ansible/playbooks/install.yaml
    ```
+
+## TODO
+rustup (install2)
+
+
+---
+pip install ansible

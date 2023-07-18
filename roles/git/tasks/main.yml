@@ -1,6 +1,6 @@
 - name: Configure git
   ansible.builtin.template:
     src: 'config.j2'
-    dest: '~/.config/git/config'
+    dest: '~/.config/git/'
     backup: true
 

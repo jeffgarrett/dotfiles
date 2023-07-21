@@ -1,0 +1,53 @@
+#!/bin/bash
+
+install_pipx() {
+  if python3 -m pip show -qq pipx ; then
+    echo "setup: Upgrading pipx"
+    python3 -m pip install --user --upgrade pipx
+  else
+    echo "setup: Installing pipx"
+    python3 -m pip install --user pipx
+  fi
+
+  echo "setup: Adding pipx to path"
+  python3 -m pipx ensurepath
+}
+
+install_ansible() {
+  local ansible_core=$(pipx list --short|grep '^ansible-core ')
+  if [[ -z $ansible_core ]] ; then
+    echo "setup: Installing ansible-core"
+    pipx install ansible-core
+  else
+    echo "setup: Upgrading ansible-core"
+    pipx upgrade ansible-core
+  fi
+
+  local ansible=$(pipx list --short|grep '^ansible ')
+  if [[ -z $ansible ]] ; then
+    echo "setup: Installing ansible"
+    pipx install ansible
+  else
+    echo "setup: Upgrading ansible"
+    pipx upgrade ansible
+  fi
+}
+
+main() {
+  if [[ -v VIRTUAL_ENV ]] ; then
+    local venv="$VIRTUAL_ENV"
+    echo "setup: Deactivating virtual environment at $venv"
+    deactivate
+
+    install_pipx
+
+    echo "setup: Re-activating virtual environment at $venv"
+    . "$venv/bin/activate"
+  else
+    install_pipx
+  fi
+
+  install_ansible
+}
+
+main

@@ -8,7 +8,12 @@ On Debian/Ubuntu, sudo apt install python3-venv
 
 ## Initial setup
 
+
 1. Clone this repository to ~/.dotfiles
+2. Run setup to install pipx and ansible:
+   ```sh
+   source ~/.dotfiles/scripts/setup
+   ```
 2. Create a virtual environment:
    ```sh
    export DOTFILES=~/.dotfiles

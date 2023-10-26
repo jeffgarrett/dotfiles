@@ -1,12 +1,13 @@
+- name: Install wezterm nightly (Ubuntu 22.04+)
+  ansible.builtin.apt:
+    deb: https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
+    state: present
+  become: true
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version >= "22.04"
+
 - name: Configure wezterm
   ansible.builtin.copy:
     src: "wezterm.lua"
     dest: "{{ wezterm_config_home }}/"
     backup: true
 
-# # wezterm TODO: no apt
-#- name: Install wezterm (Ubuntu 22.04)
-#  ansible.builtin.apt:
-#    deb: https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb
-#    state: present
-#  when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"

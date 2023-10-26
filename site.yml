@@ -3,10 +3,12 @@
     - name: Configure git
       ansible.builtin.import_role:
         name: git
+      tags: git
 
     - name: Install and configure wezterm
       ansible.builtin.import_role:
         name: wezterm
+      tags: wezterm
       when: gui
 
 #[nvim.files]

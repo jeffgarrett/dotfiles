@@ -5,6 +5,11 @@
   become: true
   when: ansible_distribution == "Ubuntu" and ansible_distribution_version >= "22.04"
 
+#- name: Install wezterm nightly (unsupported platform)
+#  ansible.builtin.fail:
+#    msg: "Unsupported platform for wezterm"
+#  when: ansible_system == "Linux" and (ansible_distribution != "Ubuntu" or ansible_distribution_version < "22.04")
+
 - name: Configure wezterm
   ansible.builtin.copy:
     src: "wezterm.lua"
